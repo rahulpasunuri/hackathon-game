@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="description" content="Phaser.js game demo" />
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:900' rel='stylesheet' type='text/css'>
+  <style>
+    canvas {position: absolute;}
+    .container{position:absolute; left:70%; width:20%; }
+  </style>
+  <meta charset="utf-8">
+  <title>Rasna</title>
+  <script src="../phaser.min.js" type="text/javascript"></script>
+  <script src="../game.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+  <script>    
+    $(document).ready(function() {
+      //keep the game paused. let the user start it.
+        $(".game-start").click( function(){
+          //gameover.visible = true;
+     });
+     
+     $(".game-start").click();
+      
+      $('#loadbar').removeClass('ins');     
+        $('.triggerBar').click(function() {
+          $('#loadbar').removeClass('ins').delay(10).queue(function(next){
+            $(this).addClass('ins');
+                next();
+            });
+            return false;
+        });
+    });
+    </script>
+
+  </head>
+  <body>
+  <!-- LOADER BAR -->
+  <div class="container" style="width:28%; padding:1%;">
+    <div class="box" style="text-align:center;">
+      <h2 style="width:100%;">Motivator</h2>
+      <p>You are motivated today. And you want to provide an experience that spreads smiles to sad people who you meet along the way! </p>    
+      <button type="button" class="game-start" style="margin-top:10%;">Pause / Resume</button>
+    </div>
+    <div class="box">
+      <h3 style="width:100%; text-align:center; margin-top:5%;">Fill up the smiley meter to win this level</h3>
+      <ul id="loadbar">
+        <li><div id="layerFill1" class="bar"></div></li>
+        <li><div id="layerFill2" class="bar"></div></li>
+        <li><div id="layerFill3" class="bar"></div></li>
+        <li><div id="layerFill4" class="bar"></div></li>
+        <li><div id="layerFill5" class="bar"></div></li>
+        <li><div id="layerFill6" class="bar"></div></li>
+        <li><div id="layerFill7" class="bar"></div></li>
+        <li><div id="layerFill8" class="bar"></div></li>
+        <li><div id="layerFill9" class="bar"></div></li>
+        <li><div id="layerFill10" class="bar"></div></li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2 style="width:100%; text-align:center; margin-top:5%;">Instructions</h2>
+      <p>
+        Press - <br/>
+        <img src="assets/keys.png" width="20%"/>
+          Left and Right Key to steer<br/>
+          
+        <img src="assets/space.png" width="30%"/> Bar to Shoot Happiness <br/>
+         <img src="assets/smileys/happy.svg" width="10%"/>  Collect smileys to earn bonus and reach your goals faster<br/>
+          
+      </p>
+    </div>
+    <div class="box">
+      <button class="next-level">Want to play the next level?</button>
+    </div>
+  </div>
+  
+  <!-- END LOADER BAR -->
+  <!--
+  <div class="level-intro-screen">
+    <p style="margin:10%;color: #fff; font-size: 32px;">
+      Hey fellow human! We are on a mission to spread happiness little by little. <br/
+      And you know what, you can help us too! <img src="smileys/happy.svg" width="10%"/><br/>
+      All you have to do is, make sad people happy with love!<br/>
+      
+      <button type="button" class="remove-intro">Start now!</button>
+    </p>
+  </div>
+  -->
+  
+  <div class="level-over-screen">
+    <p style="margin:24%; color: #fff; font-size: 32px;">
+      You have made 10 people happy, won their hearts and cleared this level! <br/>
+      Keep it up buddy!
+    </p>
+  </div>
+  
+  <div class="level-lost-screen">
+    <p style="margin:24%; color: #fff; font-size: 32px;" class="lost-scored-msg">
+     Well done pal! You have made <span class="lost-scored"></span> people happy today. You can definitely do better than this!
+     <a href="try-again"><button type="button" class="try-again">Try Again!</button></a>
+    </p>
+  </div>
+  </body>
+  <script>
+  /*
+      $(".remove-intro").click( function(){
+          $(".level-intro-screen").animate({
+            left: -$(window).width()
+          });
+        });
+    */
+    $(".level-intro-screen").css({ width: $(window).width()*0.7, height: $(window).height() });
+
+    $(".level-over-screen").css({ width: $(window).width()*0.7, height: $(window).height() });
+    
+    $(".level-lost-screen").css({ width: $(window).width()*0.7, height: $(window).height() });
+  </script>
+</html>

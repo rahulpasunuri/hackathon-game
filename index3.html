@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="description" content="Phaser.js game demo" />
+  <link rel="stylesheet" href="style.css" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:900' rel='stylesheet' type='text/css'>
+  <style>
+    canvas {position: absolute;}
+    .container{position:absolute; left:70%; width:20%; }
+  </style>
+  <meta charset="utf-8">
+  <title>Rasna</title>
+  <script>
+          
+    function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+  </script>
+  <script src="phaser.min.js" type="text/javascript"></script>
+  <script src="game3.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+  <script>    
+    $(document).ready(function() {
+      
+      $('#loadbar').removeClass('ins');     
+        $('.triggerBar').click(function() {
+          $('#loadbar').removeClass('ins').delay(10).queue(function(next){
+            $(this).addClass('ins');
+                next();
+            });
+            return false;
+        });
+    });
+    </script>
+
+  </head>
+  <body>
+  <!-- LOADER BAR -->
+  <div class="container" style="width:28%; padding:1%;">
+    <div class="box" style="text-align:center;">
+       <h2 class="game-name" style="width:100%;">Emotivate</h2>
+      <p>You are motivated today. And you want to provide an experience that spreads smiles to sad people who you meet along the way! </p>    
+      <button type="button" class="game-start" style="position:fixed; top:90%;left:0; z-index:500;">Pause / Resume</button>
+    </div>
+    <div class="box">
+      <h3 style="width:100%; text-align:center; margin-top:5%;">Fill up the smiley meter to win this level</h3>
+      <ul id="loadbar">
+        <li><div id="layerFill1" class="bar"></div></li>
+        <li><div id="layerFill2" class="bar"></div></li>
+        <li><div id="layerFill3" class="bar"></div></li>
+        <li><div id="layerFill4" class="bar"></div></li>
+        <li><div id="layerFill5" class="bar"></div></li>
+        <li><div id="layerFill6" class="bar"></div></li>
+        <li><div id="layerFill7" class="bar"></div></li>
+        <li><div id="layerFill8" class="bar"></div></li>
+        <li><div id="layerFill9" class="bar"></div></li>
+        <li><div id="layerFill10" class="bar"></div></li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2 style="width:100%; text-align:center; margin-top:5%;">Instructions</h2>
+      <p>
+        Press - <br/>
+        <img src="assets/keys.png" width="20%"/>
+          Left and Right Key to steer<br/>
+          
+        <img src="assets/space.png" width="30%"/> Bar to Shoot Happiness <br/>
+         <img src="assets/smileys/bigsmile.svg" width="10%"/>  Collect smileys to earn bonus and reach your goals faster<br/>
+          
+      </p>
+    </div>
+    
+     <div class="box">
+      <h2 style="width:100%; text-align:center; margin-top:5%;">Credits</h2>
+        <h3>Design:</h3><hr/><br/>
+        <a href="http://shivikathapar.me" target="_blank">Shivika Thapar</a><br/>
+        <a href="http://ashishshendure.com" target="_blank">Ashish Shendure</a><br/>
+        <a href="http://adhithyakumar.com" target="_blank">Adhithya Kumar</a><br/><br/>
+       <h3>Development:</h3><hr/><br/>
+        <a href="http://dosshier.me" target="_blank">Nipurn Doshi</a><br/>
+        Rahul Pasunuri
+      </p>
+    </div>
+    
+  </div>
+  <!-- END LOADER BAR -->
+  <div class="level-intro-screen">
+    <p style="margin:5%;color: #fff; font-size: 32px;">
+      Bravo on reaching till here! <br/><br/>
+      You have reached amazing heights by making atleast 25 people happy! <br/><br/>
+      That in itself is a commendable achievement.<br/><br/>
+      Let's go to another place and make even more people happy! <br/><br/>
+      
+      <button type="button" class="remove-intro">Start now!</button>
+    </p>
+  </div>
+  
+  <div class="level-over-screen" style="text-align:center;">
+    <p style="margin:10%; color: #fff; font-size: 32px;">
+      You have made 20 people happy in this level <br/>and minimum of 50 people happy in the whole day!<br/> You're just pretty awesome! :D <br/><br/><br/>
+      <img src="assets/champion.png" width="30%"/><br/><br/>
+      Click <a href="index.html">here</a> to start all over again!
+    
+    </p>
+  </div>
+  
+  <div class="level-lost-screen">
+    <p style="margin:15%; margin-bottom:5%; color: #fff; font-size: 32px;" class="lost-scored-msg">
+     Well done pal! You have made <span class="lost-scored"></span> people happy today. You can definitely do better than this!
+    </p>
+     <a href="try-again.html"><button type="button" class="try-again">Try Again!</button></a>
+  </div>
+  </body>
+  <script>
+      $(".remove-intro").click( function(){
+          $(".level-intro-screen").animate({
+            left: -$(window).width()
+          });
+          $(".game-start").click();
+        });
+    $(".level-intro-screen").css({ width: $(window).width()*0.7, height: $(window).height() });
+
+    $(".level-over-screen").css({ width: $(window).width()*0.7, height: $(window).height() });
+    
+    $(".level-lost-screen").css({ width: $(window).width()*0.7, height: $(window).height() });
+    
+    if( getCookie("level2") != 1) 
+    {
+      $(".level-intro-screen").html("<p style='margin-top:15%; color: #fff; font-size:32px;'>Heyy! We know you want to play the harder levels. But you need to complete previous level before coming here! Click <a href='index.html'>here</a> to go back!</p>");
+    }
+  </script>
+</html>
